@@ -1,0 +1,5 @@
+name: WreckCells
+version: '${project.version}'
+main: me.clutchmasterftw.wreckcells.WreckCells
+api-version: '1.19'
+depend: [Prison, JetsPrisonCells]
