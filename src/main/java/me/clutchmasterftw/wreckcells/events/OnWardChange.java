@@ -1,6 +1,7 @@
 package me.clutchmasterftw.wreckcells.events;
 
 import com.google.common.eventbus.Subscribe;
+import me.clutchmasterftw.wreckcells.WreckCells;
 import me.jet315.prisoncells.JetsPrisonCells;
 import me.jet315.prisoncells.cells.Cell;
 import me.jet315.prisoncells.users.CellUser;
@@ -26,7 +27,7 @@ public class OnWardChange implements Listener {
                 Player player = Bukkit.getPlayer(uuid);
 
                 if(!e.isCanceled() && e.getPlayer().getBalance() >= e.getCost()) {
-                    System.out.println("[WreckCells] {Ward Change Event} " + player.getName() + " has ranked into a new ward (" + rank.charAt(0) + ").");
+                    WreckCells.getPlugin().getLogger().info("{Ward Change Event} " + player.getName() + " has ranked into a new ward (" + rank.charAt(0) + ").");
                 }
 
                 CellUser cellUser = JetsPrisonCells.getInstance().getPlayerManager().getCellUser(uuid);
@@ -35,7 +36,7 @@ public class OnWardChange implements Listener {
                     cellOwned.setUnclaimed();
                     player.sendMessage(PREFIX + ChatColor.RED + "You've been evicted from your cell due to your ward change. You were warned!");
                     //Log the cell number that was lost upon changing wards
-                    System.out.println("[WreckCells] {Ward Change Event} " + player.getName() + " has lost their cell (ID: " + cellOwned.getCellName() + ").");
+                    WreckCells.getPlugin().getLogger().info("{Ward Change Event} " + player.getName() + " has lost their cell (ID: " + cellOwned.getCellName() + ").");
                 }
 
                 break;

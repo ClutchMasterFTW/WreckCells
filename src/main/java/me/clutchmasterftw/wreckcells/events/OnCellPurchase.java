@@ -21,18 +21,16 @@ import static me.clutchmasterftw.wreckcells.WreckCells.PREFIX;
 public class OnCellPurchase implements Listener {
     @EventHandler
     public void onGUICellsInteract(InventoryClickEvent e) {
-        System.out.println("1");
         if (e.getClickedInventory() != null) {
             final Player player = (Player) e.getWhoClicked();
-            System.out.println("2");
+            if(e.getInventory().getItem(13) == null) {
+                return;
+            }
             if (e.getInventory().getItem(13).getType() == Material.CLOCK) {
-                System.out.println("2.5");
                 if (JetsPrisonCells.getInstance().getGuiManager().getActiveSessions().containsKey(player.getUniqueId())) {
-                    System.out.println("3");
                     final GUISession guiSession = (GUISession) JetsPrisonCells.getInstance().getGuiManager().getActiveSessions().get(player.getUniqueId());
 //                    e.setResult(Event.Result.DENY);
                     if (e.getClickedInventory().equals(guiSession.getInventory())) {
-                        System.out.println("4");
                         String title = ChatColor.translateAlternateColorCodes('&', "&ePurchase Cell");
 
                         Cell cell = guiSession.getCell();
@@ -45,7 +43,6 @@ public class OnCellPurchase implements Listener {
 //                        player.sendMessage(PREFIX + "cellWard: " + cellWard + " | playerRankName: " + playerRankName);
 
                         if (e.getView().getTitle().equals(title) && cellWard != playerRankName) {
-                            System.out.println("5");
                             e.setCancelled(true);
                             ItemStack clickedItem = e.getCurrentItem();
 
@@ -54,7 +51,7 @@ public class OnCellPurchase implements Listener {
                             }
 
                             // Assuming the clicked item represents a rentable cell
-                            // Implement your cell renting logic here
+                            // Implement cell renting logic here
                             // For example: deducting money, assigning the cell, etc.
                             player.closeInventory();
 
